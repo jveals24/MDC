@@ -382,7 +382,6 @@
                                 class="quantity-popover__info-button quantity-popover__info-button--icon-with-label button button--tertiary"
                                 aria-expanded="false"
                               >
-                                {% render 'pickup-date-picker' %}
                                 <span class="svg-wrapper">
                                   {{- 'icon-info.svg' | inline_asset_content -}}
                                 </span>
@@ -510,6 +509,7 @@
         {%- endif -%}
 
         <!-- Start blocks -->
+        {% render 'pickup-date-picker' %}
         <!-- Subtotals -->
 
         <div class="cart-drawer__footer" {{ block.shopify_attributes }}>
