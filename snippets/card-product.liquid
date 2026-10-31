@@ -371,11 +371,7 @@
                     >
                       <span>
                         {%- if card_product.selected_or_first_available_variant.available -%}
-                          {% comment %}
-                           CUSTOMIZED: Commented out this original line to replace it with "I Want this"
-                            {{ 'products.product.add_to_cart' | t }}
-                          {% endcomment %}
-                           I want this
+                          {{ 'products.product.add_to_cart' | t }}
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
