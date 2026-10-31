@@ -1,0 +1,570 @@
+{% doc %}
+  @prompt
+    Create two coordinated homepage product sections for Mrs. Davids Creations using the native visual style of the Shopify Dawn theme.
+    The sections must feel premium, warm, spacious, and consistent with the existing homepage hero and “Build Your Perfect Box” section.
+    Overall design rules
+    Use the Dawn theme’s clean, editorial layout.
+    Use the same page width, horizontal padding, heading alignment, button style, border radius, and vertical spacing across both sections.
+    Use the store’s existing serif heading font and sans-serif body font.
+    Use a white or soft cream background.
+    Use warm terracotta only as a subtle accent.
+    Avoid gradients, heavy shadows, bright colors, decorative stickers, or playful cartoon graphics.
+    Keep all copy concise and easy to scan.
+    Show four products per row on desktop.
+    Show two products per row on mobile.
+    Keep all product cards the same height.
+    Use consistent product-image ratios across both sections.
+    Include product title, short flavor descriptor, price, and a subtle quick-add button.
+    Do not autoplay a carousel on desktop.
+    Ensure the sections stack cleanly on mobile.
+    All buttons and product cards should use the theme’s existing hover, focus, and accessibility states.
+    Do not create new typography, button styles, or unrelated visual components.
+    Maintain consistency with all existing site actions and calls to action.
+    Section One: Signature Favorites
+    Add a small uppercase eyebrow:
+    SIGNATURE FAVORITES
+    Add the heading:
+    The cookies worth coming back for
+    Add the supporting copy:
+    Our year-round oversized bakery-style favorites, baked fresh in small batches and ready to become part of your perfect box.
+    Display products from the Shopify collection named:
+    Signature Favorites
+    Show up to four products.
+    Each product card should include:
+    Product image
+    Product name
+    One-line flavor descriptor
+    Price
+    Quick-add button labeled Add to Box when technically supported; otherwise use Choose Options
+    Below the product grid, add a centered secondary button:
+    Shop Signature Favorites
+    Link the button to the Signature Favorites collection.
+    Add a small text line beneath the button:
+    Available year-round.
+    Section Two: Seasonal Collection
+    Place this section directly below Signature Favorites with enough spacing to distinguish it while keeping the same layout system.
+    Use a subtle soft-cream background or a very light warm neutral background to create visual contrast without changing the overall style.
+    Add a small uppercase eyebrow:
+    SEASONAL COLLECTION
+    Add the heading:
+    Here for the season, not forever
+    Add the supporting copy:
+    Limited flavors inspired by the season. Mix them into your box while they’re still available.
+    Display products from the Shopify collection named:
+    Seasonal Collection
+    Show up to four products.
+    Use the same product-card structure, image ratio, typography, spacing, price styling, and button styling as the Signature Favorites section.
+    Add a small, tasteful product badge that says:
+    Limited Seasonal Flavor
+    Only show the badge on products in the Seasonal Collection.
+    Below the product grid, add a centered secondary button:
+    Shop the Seasonal Collection
+    Link the button to the Seasonal Collection page.
+    Add a small text line beneath the button:
+    Seasonal flavors rotate quarterly.
+    Customer journey and actions
+    Both sections should support the primary homepage offer:
+    Build Your Box
+    Product-card clicks should open the individual product page.
+    Collection buttons should open the correct collection page.
+    Quick-add actions should use the store’s existing cart behavior and should not create a separate cart or conflicting checkout experience.
+    Do not replace the homepage’s primary Build Your Box call to action.
+    The Signature Favorites section should communicate reliability and year-round availability.
+    The Seasonal Collection section should communicate limited availability and gentle urgency.
+    The finished result should feel like one cohesive Dawn-theme website rather than two separately generated sections.
+    Important note for Shopify
+    Shopify may not be able to label the card button Add to Box if the bundle app does not support adding directly into the builder. In that case, use Choose Options or the theme’s standard quick-add behavior. Do not allow Shopify AI to create a button that looks functional but sends customers to the wrong place.
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .seasonal-collection-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .seasonal-collection__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .seasonal-collection__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .seasonal-collection__eyebrow-{{ ai_gen_id }} {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: {{ block.settings.eyebrow_color }};
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .seasonal-collection__heading-{{ ai_gen_id }} {
+    font-size: 36px;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    color: {{ block.settings.heading_color }};
+    font-weight: 400;
+  }
+
+  .seasonal-collection__description-{{ ai_gen_id }} {
+    font-size: 16px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .seasonal-collection__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .seasonal-collection__card-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .seasonal-collection__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+  }
+
+  .seasonal-collection__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .seasonal-collection__image--secondary-{{ ai_gen_id }} {
+    opacity: 0;
+  }
+
+  .seasonal-collection__image-wrapper-{{ ai_gen_id }}:hover .seasonal-collection__image--secondary-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .seasonal-collection__image-wrapper-{{ ai_gen_id }}:hover .seasonal-collection__image-{{ ai_gen_id }}:not(.seasonal-collection__image--secondary-{{ ai_gen_id }}) {
+    opacity: 0;
+  }
+
+  .seasonal-collection__badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 40px;
+    font-weight: 500;
+  }
+
+  .seasonal-collection__card-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .seasonal-collection__product-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .seasonal-collection__product-descriptor-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .seasonal-collection__product-price-{{ ai_gen_id }} {
+    font-size: 15px;
+    color: {{ block.settings.heading_color }};
+    margin: 4px 0 12px;
+  }
+
+  .seasonal-collection__quick-add-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: {{ block.settings.heading_color }};
+    border: 1px solid {{ block.settings.heading_color }};
+    border-radius: 0;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  .seasonal-collection__quick-add-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.heading_color }};
+    color: {{ block.settings.background_color }};
+  }
+
+  .seasonal-collection__footer-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .seasonal-collection__cta-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    background-color: transparent;
+    color: {{ block.settings.button_text }};
+    border: 1px solid {{ block.settings.button_background }};
+    border-radius: 0;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+  }
+
+  .seasonal-collection__cta-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover }};
+    color: {{ block.settings.button_text }};
+  }
+
+  .seasonal-collection__footer-text-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 989px) {
+    .seasonal-collection__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .seasonal-collection__heading-{{ ai_gen_id }} {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .seasonal-collection-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 0 {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+
+    .seasonal-collection__container-{{ ai_gen_id }} {
+      padding: 0 16px;
+    }
+
+    .seasonal-collection__header-{{ ai_gen_id }} {
+      margin-bottom: 32px;
+    }
+
+    .seasonal-collection__heading-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+
+    .seasonal-collection__description-{{ ai_gen_id }} {
+      font-size: 15px;
+    }
+  }
+{% endstyle %}
+
+<seasonal-collection-{{ ai_gen_id }} class="seasonal-collection-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="seasonal-collection__container-{{ ai_gen_id }}">
+    <div class="seasonal-collection__header-{{ ai_gen_id }}">
+      {% if block.settings.eyebrow != blank %}
+        <div class="seasonal-collection__eyebrow-{{ ai_gen_id }}">{{ block.settings.eyebrow }}</div>
+      {% endif %}
+      
+      {% if block.settings.heading != blank %}
+        <h2 class="seasonal-collection__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if block.settings.description != blank %}
+        <div class="seasonal-collection__description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.collection != blank %}
+      <div class="seasonal-collection__grid-{{ ai_gen_id }}">
+        {% for product in block.settings.collection.products limit: 4 %}
+          <a href="{{ product.url }}" class="seasonal-collection__card-{{ ai_gen_id }}">
+            <div class="seasonal-collection__image-wrapper-{{ ai_gen_id }}">
+               {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="seasonal-collection__image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+                {% if product.images[1] != blank %}
+                  <img
+                    src="{{ product.images[1] | image_url: width: 600 }}"
+                    alt="{{ product.images[1].alt | escape }}"
+                    class="seasonal-collection__image-{{ ai_gen_id }} seasonal-collection__image--secondary-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="600"
+                    height="600"
+                  >
+                {% endif %}
+              {% else %}
+                <div class="seasonal-collection__image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% if block.settings.show_badge %}
+                <div class="seasonal-collection__badge-{{ ai_gen_id }}">
+                  {{ block.settings.badge_text }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="seasonal-collection__card-content-{{ ai_gen_id }}">
+              <h3 class="seasonal-collection__product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+              
+              {% if product.metafields.custom.flavor_descriptor != blank %}
+                <p class="seasonal-collection__product-descriptor-{{ ai_gen_id }}">{{ product.metafields.custom.flavor_descriptor }}</p>
+              {% endif %}
+
+              <div class="seasonal-collection__product-price-{{ ai_gen_id }}">
+                {{ product.price | money }}
+              </div>
+
+              <span class="seasonal-collection__quick-add-{{ ai_gen_id }}">
+                {{ block.settings.quick_add_label }}
+              </span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="seasonal-collection__footer-{{ ai_gen_id }}">
+      {% if block.settings.collection != blank %}
+        <a href="{{ block.settings.collection.url }}" class="seasonal-collection__cta-button-{{ ai_gen_id }}">
+          {{ block.settings.cta_label }}
+        </a>
+      {% endif %}
+      
+      {% if block.settings.footer_text != blank %}
+        <div class="seasonal-collection__footer-text-{{ ai_gen_id }}">{{ block.settings.footer_text }}</div>
+      {% endif %}
+    </div>
+  </div>
+</seasonal-collection-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SeasonalCollection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        const cards = this.querySelectorAll('.seasonal-collection__card-{{ ai_gen_id }}');
+        cards.forEach(card => {
+          card.setAttribute('role', 'link');
+        });
+      }
+    }
+
+    customElements.define('seasonal-collection-{{ ai_gen_id }}', SeasonalCollection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Seasonal collection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "SEASONAL COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Here for the season, not forever"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Limited flavors inspired by the season. Mix them into your box while they're still available."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "quick_add_label",
+      "label": "Quick add button label",
+      "default": "Choose options"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Collection button label",
+      "default": "Shop the Seasonal Collection"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "Seasonal flavors rotate quarterly."
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show seasonal badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Limited Seasonal Flavor"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FAF8F5"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#8B6F47"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#C17A5C"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+{
+  "type": "color",
+  "id": "button_background",
+  "label": "Button background",
+  "default": "#F4C542"
+},
+{
+  "type": "color",
+  "id": "button_text",
+  "label": "Button text",
+  "default": "#4A2C23"
+},
+{
+  "type": "color",
+  "id": "button_hover",
+  "label": "Button hover",
+  "default": "#E6B735"
+},
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Seasonal collection"
+    }
+  ]
+}
+{% endschema %}

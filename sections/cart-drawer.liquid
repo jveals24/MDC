@@ -1,1 +1,102 @@
-{%- render 'cart-drawer' -%}
+{%comment %}{%- render 'cart-drawer' -%} {% endcomment %}
+{% comment %} 24-Hour Notice Pickup Selector with Exclusion Dates {% endcomment %}
+<div class="cart-drawer__pickup-box" style="margin: 16px 0; padding: 14px; background: #faf8f5; border: 1px solid #e8e2d9; border-radius: 8px;">
+  <label for="PickupDaySelect" style="display: block; font-size: 13px; font-weight: 700; color: #4A2E24; margin-bottom: 4px;">
+    Local Pickup (Presto, PA)
+  </label>
+  <p style="font-size: 11px; color: #6b635b; margin: 0 0 10px 0; line-height: 1.4;">
+    Pickups are Thursday–Saturday, 4–6 PM (requires 24-hr notice). Shipping orders can skip this.
+  </p>
+
+  <select 
+    id="PickupDaySelect" 
+    name="attributes[Pickup Date]" 
+    style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; background: #fff; color: #333;"
+  >
+    <option value="">Select a pickup day...</option>
+  </select>
+</div>
+
+<script>
+  (function() {
+    // -------------------------------------------------------------
+    // BLACKOUT / EXCLUSION DATES (Format: 'YYYY-MM-DD')
+    // Add any dates you want removed from the pickup calendar here:
+    // -------------------------------------------------------------
+    const blackoutDates = [
+      '2026-11-26', // Thanksgiving
+      '2026-11-27', // Black Friday
+      '2026-12-25', // Christmas
+      // '2026-12-26', // Example: Add more dates separated by commas
+    ];
+
+    function populatePickupOptions() {
+      const select = document.getElementById('PickupDaySelect');
+      if (!select) return;
+
+      select.innerHTML = '<option value="">Select a pickup day...</option>';
+
+      const now = new Date();
+      // Enforce 24-hour advance lead time
+      const minAvailableTime = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+
+      const validDays = [4, 5, 6]; // 4 = Thursday, 5 = Friday, 6 = Saturday
+      let optionsAdded = 0;
+      let checkDate = new Date(minAvailableTime);
+
+      // Scan the upcoming 21 days until 4 valid dates are found
+      for (let i = 0; i < 21 && optionsAdded < 4; i++) {
+        const dayOfWeek = checkDate.getDay();
+
+        // Format checkDate as YYYY-MM-DD in local time
+        const year = checkDate.getFullYear();
+        const month = String(checkDate.getMonth() + 1).padStart(2, '0');
+        const day = String(checkDate.getDate()).padStart(2, '0');
+        const dateKey = `${year}-${month}-${day}`;
+
+        // Verify day of week AND confirm date is not on the blackout list
+        if (validDays.includes(dayOfWeek) && !blackoutDates.includes(dateKey)) {
+          const dateString = checkDate.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric'
+          });
+
+          const fullLabel = `${dateString} (4:00 PM – 6:00 PM)`;
+          const optValue = `${dateString} (4-6 PM)`;
+
+          const opt = document.createElement('option');
+          opt.value = optValue;
+          opt.textContent = fullLabel;
+
+          if ('{{ cart.attributes["Pickup Date"] }}' === optValue) {
+            opt.selected = true;
+          }
+
+          select.appendChild(opt);
+          optionsAdded++;
+        }
+
+        checkDate.setDate(checkDate.getDate() + 1);
+      }
+
+      select.addEventListener('change', function() {
+        fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            attributes: {
+              'Pickup Date': this.value
+            }
+          })
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', populatePickupOptions);
+    } else {
+      populatePickupOptions();
+    }
+  })();
+</script>

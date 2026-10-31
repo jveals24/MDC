@@ -1,0 +1,829 @@
+{% doc %}
+  @prompt
+    Create a "How It Works" section directly below the hero banner using the native Dawn theme design language. The section should feel clean, premium, spacious, and editorial with plenty of white space. Avoid bright colors, gradients, or busy backgrounds.
+    Section Layout
+    Center all content.
+    At the top include a small uppercase eyebrow:
+    HOW IT WORKS
+    Below it, a large serif heading:
+    Three simple steps to better cookie days
+    Below the heading add a short supporting sentence:
+    Freshly baked. Carefully packed. Delivered ready to enjoy.
+    Three Column Layout
+    Create three equal-width columns with generous spacing between them.
+    Each column should contain:
+    Step Number
+    Display a small terracotta-colored circle containing:
+    1
+    2
+    3
+    Step One
+    Use a simple outlined shipping box icon.
+    Heading:
+    Choose Your Box
+    Body:
+    Pick the perfect size for your craving.
+    Below the text display three small outlined pills:
+    📦 Treat Yourself (4)
+    📦 Signature Box (6)
+    📦 Gather Box (12)
+    Step Two
+    Use a simple cookie icon.
+    Heading:
+    Fill It With Favorites
+    Body:
+    Mix and match Signature Favorites and seasonal flavors.
+    Below this display four small circular cookie thumbnails in a horizontal row.
+    Below the thumbnails include a subtle text link:
+    View all flavors
+    Step Three
+    Use a simple heart icon.
+    Heading:
+    Savor the Moment
+    Body:
+    Freshly baked, carefully packed, and ready to make an ordinary day a little sweeter.
+    Below the text display a small rounded image of an open Mrs. Davids cookie box.
+    Connect the Steps
+    Place subtle terracotta-colored arrows between each column to visually guide visitors from left to right.
+    Call to Action
+    Center a large primary button beneath the three steps:
+    Build Your Box
+    Use the site's primary brand color for the button.
+    Styling
+    Match Shopify Dawn theme styling.
+    Use the site's serif heading font and sans-serif body font.
+    Keep the background white.
+    Use soft beige or cream accents behind the icons.
+    Use thin line icons instead of filled illustrations.
+    Maintain generous vertical spacing.
+    Mobile layout should stack the three steps vertically while preserving the numbering.
+    Design Goal
+    The section should communicate that ordering is effortless while reinforcing the premium, intentional experience of Mrs. Davids Creations. It should feel elegant, trustworthy, and refined rather than playful or cartoonish. The primary goal is to encourage visitors to click "Build Your Box."
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-how-it-works-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-how-it-works-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-how-it-works-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-how-it-works-eyebrow-{{ ai_gen_id }} {
+    font-size: {{ block.settings.eyebrow_size }}px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: {{ block.settings.eyebrow_color }};
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .ai-how-it-works-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    line-height: 1.2;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 20px;
+    font-weight: 400;
+  }
+
+  .ai-how-it-works-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ai-how-it-works-steps-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: {{ block.settings.column_gap }}px;
+    margin-bottom: {{ block.settings.cta_spacing }}px;
+    align-items: start;
+  }
+
+  .ai-how-it-works-step-{{ ai_gen_id }} {
+    text-align: center;
+    position: relative;
+  }
+
+  .ai-how-it-works-step-number-{{ ai_gen_id }} {
+    width: {{ block.settings.step_number_size }}px;
+    height: {{ block.settings.step_number_size }}px;
+    border-radius: 50%;
+    background-color: {{ block.settings.step_number_bg }};
+    color: {{ block.settings.step_number_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: {{ block.settings.step_number_font_size }}px;
+    font-weight: 500;
+  }
+
+  .ai-how-it-works-icon-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.icon_bg_color }};
+    border-radius: 50%;
+  }
+
+  .ai-how-it-works-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size | times: 0.5 }}px;
+    height: {{ block.settings.icon_size | times: 0.5 }}px;
+    stroke: {{ block.settings.icon_color }};
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .ai-how-it-works-step-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.step_heading_size }}px;
+    line-height: 1.3;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+
+  .ai-how-it-works-step-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.step_text_size }}px;
+    line-height: 1.6;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 20px;
+  }
+
+  .ai-how-it-works-pills-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .ai-how-it-works-pill-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid {{ block.settings.pill_border_color }};
+    border-radius: 20px;
+    font-size: 13px;
+    color: {{ block.settings.text_color }};
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-how-it-works-thumbnails-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .ai-how-it-works-thumbnail-{{ ai_gen_id }} {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid {{ block.settings.pill_border_color }};
+  }
+
+  .ai-how-it-works-thumbnail-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-how-it-works-link-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ai-how-it-works-link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-how-it-works-box-image-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ai-how-it-works-box-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-how-it-works-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 120px;
+    right: -{{ block.settings.column_gap | divided_by: 2 }}px;
+    transform: translateX(50%);
+    width: 24px;
+    height: 24px;
+    stroke: {{ block.settings.arrow_color }};
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .ai-how-it-works-step-{{ ai_gen_id }}:last-child .ai-how-it-works-arrow-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-how-it-works-cta-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-how-it-works-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 16px 40px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    font-size: {{ block.settings.button_font_size }}px;
+    text-decoration: none;
+    border: 1px solid {{ block.settings.button_bg_color }};
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+
+  .ai-how-it-works-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg }};
+    border-color: {{ block.settings.button_hover_bg }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-how-it-works-steps-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+
+    .ai-how-it-works-arrow-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-how-it-works-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-how-it-works-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top | times: 0.7 }}px 0 {{ block.settings.padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-how-it-works-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.6 }}px;
+    }
+
+    .ai-how-it-works-pills-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-how-it-works-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-how-it-works-container-{{ ai_gen_id }}">
+    <div class="ai-how-it-works-header-{{ ai_gen_id }}">
+      {% if block.settings.eyebrow != blank %}
+        <div class="ai-how-it-works-eyebrow-{{ ai_gen_id }}">{{ block.settings.eyebrow }}</div>
+      {% endif %}
+      
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-how-it-works-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if block.settings.subheading != blank %}
+        <p class="ai-how-it-works-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="ai-how-it-works-steps-{{ ai_gen_id }}">
+      <div class="ai-how-it-works-step-{{ ai_gen_id }}">
+        <div class="ai-how-it-works-step-number-{{ ai_gen_id }}">1</div>
+        
+        <div class="ai-how-it-works-icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-how-it-works-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+
+        <h3 class="ai-how-it-works-step-heading-{{ ai_gen_id }}">{{ block.settings.step_1_heading }}</h3>
+        <p class="ai-how-it-works-step-text-{{ ai_gen_id }}">{{ block.settings.step_1_text }}</p>
+
+        <div class="ai-how-it-works-pills-{{ ai_gen_id }}">
+          <span class="ai-how-it-works-pill-{{ ai_gen_id }}">📦 {{ block.settings.pill_1_text }}</span>
+          <span class="ai-how-it-works-pill-{{ ai_gen_id }}">📦 {{ block.settings.pill_2_text }}</span>
+          <span class="ai-how-it-works-pill-{{ ai_gen_id }}">📦 {{ block.settings.pill_3_text }}</span>
+        </div>
+
+        <svg class="ai-how-it-works-arrow-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
+      <div class="ai-how-it-works-step-{{ ai_gen_id }}">
+        <div class="ai-how-it-works-step-number-{{ ai_gen_id }}">2</div>
+        
+        <div class="ai-how-it-works-icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-how-it-works-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+            <line x1="12" y1="2" x2="12" y2="9"></line>
+            <line x1="12" y1="15" x2="12" y2="22"></line>
+            <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line>
+            <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line>
+            <line x1="2" y1="12" x2="9" y2="12"></line>
+            <line x1="15" y1="12" x2="22" y2="12"></line>
+            <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line>
+            <line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line>
+          </svg>
+        </div>
+
+        <h3 class="ai-how-it-works-step-heading-{{ ai_gen_id }}">{{ block.settings.step_2_heading }}</h3>
+        <p class="ai-how-it-works-step-text-{{ ai_gen_id }}">{{ block.settings.step_2_text }}</p>
+
+        <div class="ai-how-it-works-thumbnails-{{ ai_gen_id }}">
+          {% if block.settings.cookie_image_1 %}
+            <div class="ai-how-it-works-thumbnail-{{ ai_gen_id }}">
+              <img src="{{ block.settings.cookie_image_1 | image_url: width: 100 }}" alt="Cookie flavor" loading="lazy" width="50" height="50">
+            </div>
+          {% endif %}
+          {% if block.settings.cookie_image_2 %}
+            <div class="ai-how-it-works-thumbnail-{{ ai_gen_id }}">
+              <img src="{{ block.settings.cookie_image_2 | image_url: width: 100 }}" alt="Cookie flavor" loading="lazy" width="50" height="50">
+            </div>
+          {% endif %}
+          {% if block.settings.cookie_image_3 %}
+            <div class="ai-how-it-works-thumbnail-{{ ai_gen_id }}">
+              <img src="{{ block.settings.cookie_image_3 | image_url: width: 100 }}" alt="Cookie flavor" loading="lazy" width="50" height="50">
+            </div>
+          {% endif %}
+          {% if block.settings.cookie_image_4 %}
+            <div class="ai-how-it-works-thumbnail-{{ ai_gen_id }}">
+              <img src="{{ block.settings.cookie_image_4 | image_url: width: 100 }}" alt="Cookie flavor" loading="lazy" width="50" height="50">
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.flavors_link != blank %}
+          <a href="{{ block.settings.flavors_link }}" class="ai-how-it-works-link-{{ ai_gen_id }}">{{ block.settings.flavors_link_text }}</a>
+        {% endif %}
+
+        <svg class="ai-how-it-works-arrow-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+
+      <div class="ai-how-it-works-step-{{ ai_gen_id }}">
+        <div class="ai-how-it-works-step-number-{{ ai_gen_id }}">3</div>
+        
+        <div class="ai-how-it-works-icon-wrapper-{{ ai_gen_id }}">
+          <svg class="ai-how-it-works-icon-{{ ai_gen_id }}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </div>
+
+        <h3 class="ai-how-it-works-step-heading-{{ ai_gen_id }}">{{ block.settings.step_3_heading }}</h3>
+        <p class="ai-how-it-works-step-text-{{ ai_gen_id }}">{{ block.settings.step_3_text }}</p>
+
+        {% if block.settings.box_image %}
+          <div class="ai-how-it-works-box-image-{{ ai_gen_id }}">
+            <img src="{{ block.settings.box_image | image_url: width: 400 }}" alt="Mrs. Davids cookie box" loading="lazy" width="200" height="200">
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-how-it-works-cta-{{ ai_gen_id }}">
+      <a href="{{ block.settings.cta_link }}" class="ai-how-it-works-button-{{ ai_gen_id }}">
+        {{ block.settings.cta_text }}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How it works",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "HOW IT WORKS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three simple steps to better cookie days"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Freshly baked. Carefully packed. Delivered ready to enjoy."
+    },
+    {
+      "type": "header",
+      "content": "Step 1"
+    },
+    {
+      "type": "text",
+      "id": "step_1_heading",
+      "label": "Heading",
+      "default": "Choose Your Box"
+    },
+    {
+      "type": "text",
+      "id": "step_1_text",
+      "label": "Text",
+      "default": "Pick the perfect size for your craving."
+    },
+    {
+      "type": "text",
+      "id": "pill_1_text",
+      "label": "Option 1",
+      "default": "Treat Yourself (4)"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_text",
+      "label": "Option 2",
+      "default": "Signature Box (6)"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_text",
+      "label": "Option 3",
+      "default": "Gather Box (12)"
+    },
+    {
+      "type": "header",
+      "content": "Step 2"
+    },
+    {
+      "type": "text",
+      "id": "step_2_heading",
+      "label": "Heading",
+      "default": "Fill It With Favorites"
+    },
+    {
+      "type": "text",
+      "id": "step_2_text",
+      "label": "Text",
+      "default": "Mix and match Signature Favorites and seasonal flavors."
+    },
+    {
+      "type": "image_picker",
+      "id": "cookie_image_1",
+      "label": "Cookie image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "cookie_image_2",
+      "label": "Cookie image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "cookie_image_3",
+      "label": "Cookie image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "cookie_image_4",
+      "label": "Cookie image 4"
+    },
+    {
+      "type": "url",
+      "id": "flavors_link",
+      "label": "Flavors link"
+    },
+    {
+      "type": "text",
+      "id": "flavors_link_text",
+      "label": "Flavors link text",
+      "default": "View all flavors"
+    },
+    {
+      "type": "header",
+      "content": "Step 3"
+    },
+    {
+      "type": "text",
+      "id": "step_3_heading",
+      "label": "Heading",
+      "default": "Savor the Moment"
+    },
+    {
+      "type": "text",
+      "id": "step_3_text",
+      "label": "Text",
+      "default": "Freshly baked, carefully packed, and ready to make an ordinary day a little sweeter."
+    },
+    {
+      "type": "image_picker",
+      "id": "box_image",
+      "label": "Box image"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Build Your Box"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 40,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 20,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "cta_spacing",
+      "label": "CTA spacing",
+      "min": 40,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow",
+      "default": "#8B4513"
+    },
+    {
+      "type": "color",
+      "id": "step_number_bg",
+      "label": "Step number background",
+      "default": "#D2691E"
+    },
+    {
+      "type": "color",
+      "id": "step_number_color",
+      "label": "Step number text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background",
+      "default": "#F5F5DC"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#8B4513"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow",
+      "default": "#D2691E"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Pill border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "label": "Eyebrow size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "step_heading_size",
+      "label": "Step heading size",
+      "min": 16,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "step_text_size",
+      "label": "Step text size",
+      "min": 13,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "step_number_size",
+      "label": "Step number circle size",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "step_number_font_size",
+      "label": "Step number font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon circle size",
+      "min": 60,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "How it works"
+    }
+  ]
+}
+{% endschema %}
