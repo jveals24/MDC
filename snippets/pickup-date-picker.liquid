@@ -13,17 +13,7 @@
     <p style="font-size: 11px; color: #6b635b; margin: 0 0 10px 0; line-height: 1.4;">
       Pickups are Thursday–Saturday, 4–6 PM. <em>If not selected automatically, please tap the <strong>Pickup</strong> tab at checkout.</em>
     </p>
-
-    <select 
-      id="PickupDaySelect" 
-      name="attributes[Pickup Date]" 
-      form="CartDrawer-Form"
-      data-current-value="{{ cart.attributes['Pickup Date'] | escape }}"
-      style="width: 100%; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; background: #fff; color: #333;"
-    >
-      <option value="">Select a pickup day...</option>
-    </select>
-  </div>
+    
   <select 
     id="PickupDaySelect" 
     name="attributes[Pickup Date]" 
