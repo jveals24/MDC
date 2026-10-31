@@ -119,15 +119,15 @@
         "text_dLVwzK": {
           "type": "text",
           "settings": {
-            "text": "<p>Build a box with the cookies calling your name. Mix your favorites, try something new, or do a little of both.</p>",
+            "text": "<p>You shouldn't have to settle for just one! Treat yourself to our signature 6-pack and experience the best of everything—from rich molten centers to spiced bakery bliss, all packed fresh and ready to savor.</p>",
             "text_style": "body"
           }
         },
         "button_EMJRhn": {
           "type": "button",
           "settings": {
-            "button_label": "Build Your Box",
-            "button_link": "shopify://products/6-cookies-build-your-box-most-popular",
+            "button_label": "Shop the Customer Favorites 6-Pack",
+            "button_link": "shopify://products/customer-favorites-6-pack",
             "button_style_secondary": false
           }
         }
