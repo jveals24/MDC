@@ -402,13 +402,15 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    {%comment %}This is the script for the Pickup Day Select Dropdown {%endcomment %}
     <script>
-  // Expose globally so drawer events and console can access it
   window.populatePickupOptions = function() {
     const select = document.getElementById('PickupDaySelect');
     if (!select) return;
 
-    // Reset with initial placeholder
+    // Retrieve existing attribute from dataset or memory
+    const savedValue = select.dataset.currentValue || window._currentPickupDate || '';
+
     select.innerHTML = '<option value="">Select a pickup day...</option>';
 
     const blackoutDates = [
@@ -418,7 +420,6 @@
     ];
 
     const now = new Date();
-    // 24-hour advance notice requirement
     const minAvailableTime = new Date(now.getTime() + (24 * 60 * 60 * 1000));
     const validDays = [4, 5, 6]; // 4 = Thu, 5 = Fri, 6 = Sat
     let optionsAdded = 0;
@@ -443,6 +444,10 @@
         opt.value = optValue;
         opt.textContent = `${dateString} (4:00 PM – 6:00 PM)`;
 
+        if (savedValue && savedValue === optValue) {
+          opt.selected = true;
+        }
+
         select.appendChild(opt);
         optionsAdded++;
       }
@@ -450,30 +455,42 @@
     }
 
     // Save selection to cart attributes
-    select.onchange = function() {
-      fetch('/cart/update.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          attributes: {
-            'Pickup Date': this.value
-          }
-        })
-      });
+    select.onchange = async function() {
+      const val = this.value;
+      window._currentPickupDate = val;
+      select.dataset.currentValue = val;
+
+      try {
+        const response = await fetch('/cart/update.js', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            attributes: {
+              'Pickup Date': val
+            }
+          })
+        });
+
+        if (!response.ok) {
+          console.error('Failed to save pickup date to cart');
+        }
+      } catch (err) {
+        console.error('Error updating cart attributes:', err);
+      }
     };
   };
 
-  // Run on initial page load
   document.addEventListener('DOMContentLoaded', () => {
     window.populatePickupOptions();
   });
 
-  // Listen to Dawn's custom web component drawer events
   document.addEventListener('cart:updated', () => {
     window.populatePickupOptions();
   });
 
-  // Watch for class changes when Dawn toggles .active on <cart-drawer>
   const cartDrawerEl = document.querySelector('cart-drawer');
   if (cartDrawerEl) {
     const drawerObserver = new MutationObserver((mutations) => {
@@ -486,7 +503,6 @@
     drawerObserver.observe(cartDrawerEl, { attributes: true });
   }
 
-  // Fallback observer watching child additions
   const bodyObserver = new MutationObserver(() => {
     const select = document.getElementById('PickupDaySelect');
     if (select && select.options.length <= 1) {
@@ -494,6 +510,6 @@
     }
   });
   bodyObserver.observe(document.body, { childList: true, subtree: true });
-</script>}
+</script>
   </body>
 </html>
